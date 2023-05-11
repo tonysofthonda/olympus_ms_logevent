@@ -21,6 +21,8 @@ public class FileService
 {
 	
 	private static final String SEPARATOR = ",";
+	private static final String NEW_LINE = "\n";
+	private static final String PREFIX = "event";
 	private static final String FILE_EXTENSION = ".txt";
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
 	private static final String TIME_FORMAT = "hh:mm:ss";
@@ -40,7 +42,6 @@ public class FileService
 		LocalDateTime ldt = LocalDateTime.now();
 		
 		return new StringBuilder()
-			.append(System.lineSeparator())
 			.append(ldt.toLocalDate().format(DateTimeFormatter.ofPattern(DATE_FORMAT)))
 			.append(SEPARATOR)
             .append(ldt.toLocalTime().format(DateTimeFormatter.ofPattern(TIME_FORMAT)))
@@ -52,14 +53,15 @@ public class FileService
             .append(event.getMessage())
             .append(SEPARATOR)
             .append(event.getFile())
+            .append(NEW_LINE)
 			.toString();
 	}
 	
 	
 	public Path buildPathname(Event event) 
-	{	
+	{
 		StringBuilder sb = new StringBuilder()
-			.append(event.getSource())
+			.append(PREFIX)
 			.append(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE))
 		    .append(FILE_EXTENSION);
 		
