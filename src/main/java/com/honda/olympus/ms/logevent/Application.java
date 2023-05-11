@@ -6,9 +6,11 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
 
 
 @SpringBootApplication
+@PropertySource(value = "file:../logevent.properties", ignoreResourceNotFound = false)
 public class Application 
 {
 
