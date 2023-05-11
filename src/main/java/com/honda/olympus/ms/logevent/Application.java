@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 
 
 @SpringBootApplication
-@PropertySource(value = "file:../logevent.properties", ignoreResourceNotFound = false)
+@PropertySource(value = "file:../properties", ignoreResourceNotFound = false)
 public class Application 
 {
 
