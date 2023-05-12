@@ -1,4 +1,4 @@
-package com.honda.olympus.ms.logevent.service;
+package com.honda.olympus.ms.logevent.util;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -10,14 +10,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.honda.olympus.ms.logevent.domain.Event;
 
 
-@Service
-public class FileService 
+@Component
+public class FileHandler 
 {
 	
 	private static final String SEPARATOR = ",";
@@ -26,10 +25,6 @@ public class FileService
 	private static final String FILE_EXTENSION = ".txt";
 	private static final String DATE_FORMAT = "yyyy-MM-dd";
 	private static final String TIME_FORMAT = "hh:mm:ss";
-	
-	
-	@Value("${logpath}")
-	private String logPath;
 	
 	
 	public void appendToFile(Path path, String line) throws IOException {
@@ -58,7 +53,7 @@ public class FileService
 	}
 	
 	
-	public Path buildPathname() 
+	public Path buildPathname(String logPath) 
 	{
 		StringBuilder sb = new StringBuilder()
 			.append(PREFIX)
