@@ -22,7 +22,7 @@ public class EventService
 	
 	public void saveEvent(Event event) 
 	{
-		Path pathname = fileService.buildPathname(event);
+		Path pathname = fileService.buildPathname();
 		String line = fileService.buildEntryLine(event);
 		
 		try {

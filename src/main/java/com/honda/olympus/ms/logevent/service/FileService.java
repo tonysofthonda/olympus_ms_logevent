@@ -50,7 +50,7 @@ public class FileService
             .append(SEPARATOR)
             .append(event.getStatus())
             .append(SEPARATOR)
-            .append(event.getMessage())
+            .append(event.getMsg())
             .append(SEPARATOR)
             .append(event.getFile())
             .append(NEW_LINE)
@@ -58,7 +58,7 @@ public class FileService
 	}
 	
 	
-	public Path buildPathname(Event event) 
+	public Path buildPathname() 
 	{
 		StringBuilder sb = new StringBuilder()
 			.append(PREFIX)
