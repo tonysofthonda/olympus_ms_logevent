@@ -10,7 +10,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
+import com.honda.olympus.ms.logevent.util.Profiles;
+
+
 
 
 @SpringBootApplication
@@ -19,6 +24,7 @@ public class Application
 {
 
 	public static void main(String[] args) {
+		System.setProperty(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, Profiles.DEV);
 		SpringApplication.run(Application.class, args);
 	}
 	
