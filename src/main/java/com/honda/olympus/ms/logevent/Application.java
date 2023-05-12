@@ -16,10 +16,9 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import com.honda.olympus.ms.logevent.util.Profiles;
 
 
-
-
 @SpringBootApplication
-@PropertySource(value = "file:../properties", ignoreResourceNotFound = false)
+@PropertySource(value = "file:../properties", ignoreResourceNotFound = true)
+@PropertySource(value = "classpath:defaultProperties", ignoreResourceNotFound = false)
 public class Application 
 {
 
