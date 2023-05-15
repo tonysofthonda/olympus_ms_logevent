@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.honda.olympus.ms.logevent.domain.Event;
-import com.honda.olympus.ms.logevent.util.StringUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,24 +36,14 @@ public class FileService
 	private String logPath;
 	
 	
-	public FileService(@Value("${logpath:}") String logpath, @Value("${defaultLogpath}") String defaultLogpath) 
-	{
-		boolean externalPropertiesFound = !StringUtil.isBlank(logpath);
-		
-		if (externalPropertiesFound) {
-			this.logPath = logpath; 
-			log.info("# Accessing to logpath: {}", this.logPath);
-		}
-		else {
-			this.logPath = defaultLogpath; 
-			log.info("# Accessing to 'default' logpath: {}", this.logPath);
-		}
-	
+	public FileService(@Value("${logpath}") String logpath) {
+		logPath = logpath;
+		log.info("# Accessing to logpath: {}", logPath);
 		try {
-			createDirectory(this.logPath);
+			createDirectory(logPath);
 		}
 		catch(Exception exception) {
-			String message = "Error found while accessing to: " + this.logPath;
+			String message = "Error found while accessing to: " + logPath;
 			log.error("### {}", message, exception);
 			
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, message);

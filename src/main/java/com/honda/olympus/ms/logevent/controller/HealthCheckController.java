@@ -21,15 +21,12 @@ public class HealthCheckController
 	@Value("${version}")
 	private String version; 
 	
-	@Value("${profile}")
-	private String profile;
-	
 	
 	@GetMapping("/health")
 	public ResponseEntity<String> healthCheck() 
 	{
-		String message = String.format("Honda Olympus [name: %s] [version: %s] [profile: %s] %s %s", 
-			name, version, profile, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), TimeZone.getDefault().getID() );
+		String message = String.format("Honda Olympus [name: %s] [version: %s] %s %s", 
+			name, version, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), TimeZone.getDefault().getID() );
 		
 		return new ResponseEntity<>(message, HttpStatus.OK);
 	}

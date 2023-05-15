@@ -10,20 +10,15 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-
-import com.honda.olympus.ms.logevent.util.Profiles;
 
 
 @SpringBootApplication
-@PropertySource(value = "file:../properties", ignoreResourceNotFound = true)
-@PropertySource(value = "classpath:defaultProperties", ignoreResourceNotFound = false)
+@PropertySource(value = "classpath:properties.xml", ignoreResourceNotFound = false)
 public class Application 
 {
 
 	public static void main(String[] args) {
-		System.setProperty(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, Profiles.DEV);
 		SpringApplication.run(Application.class, args);
 	}
 	
