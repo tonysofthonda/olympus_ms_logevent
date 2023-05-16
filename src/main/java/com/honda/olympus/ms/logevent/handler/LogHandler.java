@@ -32,22 +32,17 @@ public final class LogHandler
 	private LogHandler() { }
 	
 	
-	public static void createLogPath(String logPath) {
-		File directories = new File(logPath);
+	public static boolean createDirectory(String logPath) {
+		File directory = new File(logPath);
 		
-		if (!directories.exists()) { 
-			log.info("# Creating directories of logpath: {}", logPath);
-			directories.mkdirs();
+		if (!directory.exists()) { 
+			log.info("# Creating logpath directory: {}", logPath);
+			directory.mkdirs();
+			return true;
 		}
-		else {
-			log.info("# Logpath directories already exists");
-		}
-	}
-	
-	
-	public static void appendToFile(Path path, String line) throws IOException {
-		line += NEW_LINE;
-		Files.write(path, line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		
+		log.info("# Logpath directory already exists");
+		return false;
 	}
 	
 	
@@ -77,6 +72,12 @@ public final class LogHandler
             .append(SEPARATOR)
             .append(event.getFile())
 			.toString();
+	}
+	
+	
+	public static void appendToFile(Path path, String line) throws IOException {
+		line += NEW_LINE;
+		Files.write(path, line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 	}
 
 }

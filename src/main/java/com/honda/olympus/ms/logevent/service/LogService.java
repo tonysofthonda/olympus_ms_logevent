@@ -21,7 +21,7 @@ public class LogService
 	public LogService(@Value("${logpath}") String logpath) {
 		logPath = logpath;	
 		try {
-			LogHandler.createLogPath(logPath);
+			LogHandler.createDirectory(logPath);
 		}
 		catch(Exception exception) {
 			HttpHandler.handleBadResponse("Error found while accessing to: " + logPath, exception);
