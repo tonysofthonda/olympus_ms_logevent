@@ -23,11 +23,14 @@ public class LogController
 	@Autowired
 	private LogService logService;
 	
+	@Autowired
+	private HttpHandler httpHandler;
+	
 	
 	@PostMapping(path = "/event", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> logEvent(@Valid @RequestBody Event event, Errors errors) 
 	{
-		HttpHandler.handleBadRequest(errors);
+		httpHandler.handleBadRequest(errors);
 		logService.logEvent(event);
 		
 		return ResponseEntity.ok(HttpStatus.OK.getReasonPhrase());

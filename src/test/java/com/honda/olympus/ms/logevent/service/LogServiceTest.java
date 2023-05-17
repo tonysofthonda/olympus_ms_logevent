@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.web.server.ResponseStatusException;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import com.honda.olympus.ms.logevent.domain.Event;
+import com.honda.olympus.ms.logevent.handler.HttpHandler;
 import com.honda.olympus.ms.logevent.handler.LogHandler;
 
 
@@ -30,6 +32,11 @@ public class LogServiceTest
 	static Event event = new Event("ms.monitor", 400, "Bad Request", "xfiles.zip");
 	static Path path = Paths.get(logPath, LogHandler.getFileName());
 
+	
+	@BeforeAll
+	static void beforeAll() {
+		logService.setHttpHandler(new HttpHandler());
+	}
 
 	@AfterAll
 	static void afterAll() {
