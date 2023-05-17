@@ -32,7 +32,8 @@ public class LogHandlerTest
 	static File directory = new File(logPath);
 	
 	static Event event = new Event("ms.monitor", 400, "Bad Request", "xfiles.zip");
-	static Path path = Paths.get(logPath, LogHandler.getFileName());
+	static LogHandler logHandler = new LogHandler();
+	static Path path = Paths.get(logPath, logHandler.getFileName());
 	
 	
 	@AfterAll
@@ -48,7 +49,7 @@ public class LogHandlerTest
 	void shouldCreateDirectory() 
 	{
 		assertThat(directory).doesNotExist().withFailMessage(() -> "the directory should not exist");
-		boolean actual = LogHandler.createDirectory(logPath);
+		boolean actual = logHandler.createDirectory(logPath);
 		
 		assertThat(directory).exists().withFailMessage(() -> "the directory should exist");
 		assertThat(actual).isTrue().withFailMessage(() -> "the directory should be created");
@@ -60,7 +61,7 @@ public class LogHandlerTest
 	void shouldNotCreateDirectory() 
 	{
 		assertThat(directory).exists().withFailMessage(() -> "the directory should exist");
-		boolean actual = LogHandler.createDirectory(logPath);
+		boolean actual = logHandler.createDirectory(logPath);
 		
 		assertThat(actual).isFalse().withFailMessage(() -> "the directory should not be created");
 	}
@@ -71,7 +72,7 @@ public class LogHandlerTest
 	void shouldReturnFileName()
 	{
 		String expected = "event" + LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE) + ".txt";
-		String actual = LogHandler.getFileName();
+		String actual = logHandler.getFileName();
 		
 		assertThat(actual).isEqualTo(expected).withFailMessage(() -> "the file name should be returned");
 		log.info(">> FileName: {}", actual);
@@ -90,7 +91,7 @@ public class LogHandlerTest
 			event.getMsg() + SEP + 
 			event.getFile();
 		
-		String actual = LogHandler.getLogEntry(event);
+		String actual = logHandler.getLogEntry(event);
 		
 		assertThat(actual).isEqualTo(expected).withFailMessage(() -> "a well formed log entry should be returned");
 		log.info(">> LogEntry: {}", actual);
@@ -101,9 +102,9 @@ public class LogHandlerTest
 	@Order(5)
 	void shouldWriteEventToLog() throws IOException
 	{
-		String line = LogHandler.getLogEntry(event);
+		String line = logHandler.getLogEntry(event);
 		
-		LogHandler.appendToFile(path, line);
+		logHandler.appendToFile(path, line);
 		assertThat(path.toFile()).hasContent(line + "\n").withFailMessage(() -> "a log entry should be in the log file");
 	}
 

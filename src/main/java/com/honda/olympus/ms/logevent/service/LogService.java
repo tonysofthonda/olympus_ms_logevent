@@ -14,29 +14,32 @@ import com.honda.olympus.ms.logevent.handler.LogHandler;
 import lombok.Setter;
 
 
-@Setter
 @Service
 public class LogService 
 {
 	
 	private String logPath;
+	private LogHandler logHandler;
 	
+	@Setter
 	@Autowired
 	private HttpHandler httpHandler;
 	
 	
-	public LogService(@Value("${logpath}") String logpath) {
-		logPath = logpath;	
-		LogHandler.createDirectory(logPath);
+	public LogService(@Value("${logpath}") String logpath, @Autowired LogHandler logHandler) {
+		logPath = logpath;
+		this.logHandler = logHandler;
+		
+		logHandler.createDirectory(logPath);
 	}
 	
 	
 	public void logEvent(Event event) {
 		try {
-			Path path = Paths.get(logPath, LogHandler.getFileName());
-			String line = LogHandler.getLogEntry(event);
+			Path path = Paths.get(logPath, logHandler.getFileName());
+			String line = logHandler.getLogEntry(event);
 			
-			LogHandler.appendToFile(path, line);
+			logHandler.appendToFile(path, line);
 		}
 		catch(Exception exception) {
 			httpHandler.handleBadResponse("Error found while writing to: " + logPath, exception);

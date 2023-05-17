@@ -27,10 +27,12 @@ public class LogServiceTest
 	static String logPath = Paths.get(System.getProperty("java.io.tmpdir"), "/ms.logevent/logs").toString();
 	static File directory = new File(logPath);
 	
-	static LogService logService = new LogService(logPath);
+	static LogHandler logHandler = new LogHandler();
+	static LogService logService = new LogService(logPath, logHandler);
 	
 	static Event event = new Event("ms.monitor", 400, "Bad Request", "xfiles.zip");
-	static Path path = Paths.get(logPath, LogHandler.getFileName());
+	
+	static Path path = Paths.get(logPath, logHandler.getFileName());
 
 	
 	@BeforeAll
@@ -52,7 +54,7 @@ public class LogServiceTest
 	{
 		logService.logEvent(event);
 		
-		String line = LogHandler.getLogEntry(event);
+		String line = logHandler.getLogEntry(event);
 		assertThat(path.toFile()).hasContent(line + "\n").withFailMessage(() -> "the event should be logged");
 	}
 	

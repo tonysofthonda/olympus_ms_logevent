@@ -10,13 +10,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.springframework.stereotype.Component;
+
 import com.honda.olympus.ms.logevent.domain.Event;
 
 import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-public final class LogHandler 
+@Component
+public class LogHandler 
 {
 	
 	private static final String SEPARATOR = ",";
@@ -29,10 +32,7 @@ public final class LogHandler
 	private static final String TIME_FORMAT = "HH:mm:ss";
 	
 	
-	private LogHandler() { }
-	
-	
-	public static boolean createDirectory(String logPath) {
+	public boolean createDirectory(String logPath) {
 		File directory = new File(logPath);
 		
 		if (!directory.exists()) { 
@@ -46,7 +46,7 @@ public final class LogHandler
 	}
 	
 	
-	public static String getFileName() {
+	public String getFileName() {
 		StringBuilder sb = new StringBuilder()
 			.append(PREFIX)
 			.append(LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE))
@@ -56,7 +56,7 @@ public final class LogHandler
 	}
 	
 	
-	public static String getLogEntry(Event event) {
+	public String getLogEntry(Event event) {
 		LocalDateTime ldt = LocalDateTime.now();
 		
 		return new StringBuilder()
@@ -75,7 +75,7 @@ public final class LogHandler
 	}
 	
 	
-	public static void appendToFile(Path path, String line) throws IOException {
+	public void appendToFile(Path path, String line) throws IOException {
 		line += NEW_LINE;
 		Files.write(path, line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 	}
