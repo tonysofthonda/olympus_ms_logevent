@@ -19,7 +19,7 @@ Basically, this application exposes a single endpoint (as a REST Web service) th
    `event{yyyy}{MM}{dd}.txt`
    
 4. An HTTP client can log an event, by hitting the endpoint  
-   `http://{server-domain|ip}:8083/olympus/logevent/v1/event`  
+   `http://{server-ip}:8083/olympus/logevent/v1/event`  
    sending a POST request in JSON format, with the body containing the event data:  
    `{`  
    `   "source": "microservice-name",`  
@@ -35,7 +35,7 @@ Basically, this application exposes a single endpoint (as a REST Web service) th
    message is sent to the client.  
 
 7. The health-check endpoint can be used to verify if the application is up and running.  
-   `http://{server-domain|ip}:8083/olympus/logevent/v1/health`  
+   `http://{server-ip}:8083/olympus/logevent/v1/health`  
 
 
 ## Tools  
@@ -67,7 +67,7 @@ Running the tests
 #### Request
 `POST /olympus/logevent/v1/event`
 
-    curl -X POST -H 'Content-Type: application/json' -d '{"source": "ms.monitor", "status": 400, "msg": "Not Found", "file": "file.zip"}' http://localhost:8083/olympus/logevent/v1/event
+    curl -X POST -H 'Content-Type: application/json' -d '{"source": "ms.monitor", "status": 400, "msg": "Not Found", "file": "file.zip"}' http://{server-ip}:8083/olympus/logevent/v1/event
 
 #### Response
     HTTP/1.1 200
@@ -82,7 +82,7 @@ Running the tests
 #### Request
 `POST /olympus/logevent/v1/event`
 
-    curl -i -X POST -H 'Content-Type: application/json' -d '{"file": "file.zip"}' http://localhost:8083/olympus/logevent/v1/event
+    curl -i -X POST -H 'Content-Type: application/json' -d '{"file": "file.zip"}' http://{server-ip}:8083/olympus/logevent/v1/event
 
 #### Response
     HTTP/1.1 400
