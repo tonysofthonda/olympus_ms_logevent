@@ -67,7 +67,7 @@ Running the tests
 #### Request
 `POST /olympus/logevent/v1/event`
 
-    curl -X POST -H 'Content-Type: application/json' -d '{"source": "ms.monitor", "status": 400, "msg": "Not Found", "file": "file.zip"}' http://{server-ip}:8083/olympus/logevent/v1/event
+    curl -X POST -H 'Content-Type: application/json' -d '{"source": "ms.monitor", "status": 1, "msg": "SUCCESS", "file": "file01.txt"}' http://{server-ip}:8083/olympus/logevent/v1/event
 
 #### Response
     HTTP/1.1 200
@@ -82,7 +82,7 @@ Running the tests
 #### Request
 `POST /olympus/logevent/v1/event`
 
-    curl -i -X POST -H 'Content-Type: application/json' -d '{"file": "file.zip"}' http://{server-ip}:8083/olympus/logevent/v1/event
+    curl -i -X POST -H 'Content-Type: application/json' -d '{"file": "file01.txt"}' http://{server-ip}:8083/olympus/logevent/v1/event
 
 #### Response
     HTTP/1.1 400
