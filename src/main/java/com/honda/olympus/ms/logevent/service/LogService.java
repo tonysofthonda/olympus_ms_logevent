@@ -30,11 +30,14 @@ public class LogService
 	public static final String DATE_FORMAT = "yyyy-MM-dd";
 	public static final String TIME_FORMAT = "HH:mm:ss";
 	
+	private static final String BASE_DIR = System.getProperty("java.io.tmpdir"); 
+	
 	private String logPath;
 	
 	
-	public LogService(@Value("${logpath}") String logPath) {
-		this.logPath = logPath;
+	public LogService(@Value("${logpath}") String logpath) {
+		// logPath = logpath;
+		logPath = Paths.get(String.format(logpath, BASE_DIR)).toString();
 		try { 
 			FileUtil.createDir(logPath);
 		}

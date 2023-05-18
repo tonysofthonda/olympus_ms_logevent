@@ -2,5 +2,5 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
-    <entry key="logpath">/ms.logevent/logs</entry>
+    <entry key="logpath">%s/ms.logevent/logs</entry>
 </properties>
