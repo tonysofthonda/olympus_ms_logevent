@@ -37,7 +37,6 @@ public class LogController
 	}
 	
 	
-	
 	public void handleBadRequest(Errors errors) {
 		if (errors.hasErrors()) {
 			String messages = errors.getFieldErrors().stream().map(FieldError::getDefaultMessage).collect(joining("; "));
