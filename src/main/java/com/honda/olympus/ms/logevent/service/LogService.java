@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.honda.olympus.ms.logevent.domain.Event;
 import com.honda.olympus.ms.logevent.util.FileUtil;
-import com.honda.olympus.ms.logevent.util.HttpUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,11 +33,11 @@ public class LogService
 	
 	private static final String BASE_DIR = System.getProperty("java.io.tmpdir"); 
 	
+	
 	private String logPath;
 	
 	
 	public LogService(@Value("${logpath}") String logpath) {
-		// logPath = logpath;
 		logPath = Paths.get(String.format(logpath, BASE_DIR)).toString();
 		try { 
 			FileUtil.createDir(logPath);
@@ -54,7 +55,9 @@ public class LogService
 			FileUtil.appendToFile(this.getPath(), this.getLine(event));
 		}
 		catch(Exception exception) {
-			HttpUtil.handleBadResponse("Error found while writing to: " + this.getPath(), exception);
+			String message = "Error found while writing to: " + this.getPath();
+			log.error("### {}", message, exception);
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, message);
 		}
 	}
 	
