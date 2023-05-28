@@ -29,7 +29,7 @@ public final class FileUtil
 		return false;
 	}
 	
-	public static void appendToFile(Path path, String line) throws IOException {
+	public static synchronized void appendToFile(Path path, String line) throws IOException {
 		Files.write(path, line.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 	}
 	
