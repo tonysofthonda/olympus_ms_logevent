@@ -49,15 +49,20 @@ public class LogService
 		log.info("# logpath: {}", logPath);
 	}
 	
-	
+
 	public void logEvent(Event event) {
 		try {
+			
 			FileUtil.appendToFile(this.getPath(), this.getLine(event));
-		}
-		catch(Exception exception) {
-			String message = "Error found while writing to: " + this.getPath();
-			log.error("### {}", message, exception);
+		} catch (AccessDeniedException exception) {
+			String message = "Error found while accessing/reading file: " + this.getPath();
+			log.info("LogEventService:: {}", message);
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, message);
+
+		} catch (IOException exception) {
+			String message = "Error while writing file: " + this.getPath();
+			log.info("LogEventService:: {}", message);
+		    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, message);
 		}
 	}
 	
