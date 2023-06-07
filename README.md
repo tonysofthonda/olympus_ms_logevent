@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# olympus_ms_logevent
-=======
 
 # Log Event Microservice  
 
