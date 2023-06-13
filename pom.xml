@@ -17,12 +17,7 @@
 	<packaging>war</packaging>
 	<name>ms.logevent</name>
 	<description>Log Event Microservice</description>
-<<<<<<< HEAD
-	<packaging>war</packaging>
-	
-=======
 
->>>>>>> develop
 	<properties>
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -83,16 +78,16 @@
 		</dependency>
 		
 		<dependency>
-<<<<<<< HEAD
-        	<groupId>org.projectlombok</groupId>
-        	<artifactId>lombok</artifactId>
-    	</dependency>
-=======
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<scope>provided</scope>
 		</dependency>
->>>>>>> develop
+		
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.7.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

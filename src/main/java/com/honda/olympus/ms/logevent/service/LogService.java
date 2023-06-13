@@ -51,9 +51,9 @@ public class LogService
 		log.info("# logpath: {}", logPath);
 	}
 	
-
+	
 	public void logEvent(Event event) {
-		try {
+try {
 			
 			FileUtil.appendToFile(this.getPath(), this.getLine(event));
 		} catch (AccessDeniedException exception) {

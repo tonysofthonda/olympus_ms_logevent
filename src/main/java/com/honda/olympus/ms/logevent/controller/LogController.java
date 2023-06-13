@@ -18,6 +18,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.honda.olympus.ms.logevent.domain.Event;
 import com.honda.olympus.ms.logevent.service.LogService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 
 @RestController
 public class LogController 
@@ -26,7 +28,7 @@ public class LogController
 	@Autowired
 	private LogService logService;
 	
-	
+	@Operation(summary = "Generate a log entry in file")
 	@PostMapping(path = "/event", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> logEvent(@Valid @RequestBody Event event, Errors errors) 
 	{
